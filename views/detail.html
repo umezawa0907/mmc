@@ -1,0 +1,11 @@
+<body>
+  <h2>詳細</h2>
+
+  <form method="post" action="/update/{{.point.ID}}">
+    <p>Aさんの素点<input type="number" name="sotenA" size="5" value="{{.point.SotenA}}"></p>
+    <p>Bさんの素点<input type="number" name="sotenB" size="5" value="{{.point.SotenB}}"></p>
+    <p>Cさんの素点<input type="number" name="sotenC" size="5" value="{{.point.SotenC}}"></p>
+    <p>Dさんの素点<input type="number" name="sotenD" size="5" value="{{.point.SotenD}}"></p>
+    <p><input type="submit" value="Send"></p>
+  </form>
+</body>

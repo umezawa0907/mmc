@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>一覧ページ</title>
+</head>
+
+<body>
+  <header>
+    <h1>麻雀成績管理</h1>
+  </header>
+  <div class="wrap">
+    <div class="input">
+      <p>{{.err}}</p>
+      <form action="/new" method="post">
+        <p>Aさんの素点<input type="number" name="sotenA" size="5" placeholder="25000" /></p>
+        <p>Bさんの素点<input type="number" name="sotenB" size="5" placeholder="25000" /></p>
+        <p>Cさんの素点<input type="number" name="sotenC" size="5" placeholder="25000" /></p>
+        <p>Dさんの素点<input type="number" name="sotenD" size="5" placeholder="25000" /></p>
+        <p><input type="submit" value="登録する" /></p>
+      </form>
+    </div>
+    <div class="indexGet">
+      <ul>
+        {{range.pointList}}
+        <li>
+          <p>対局NO.{{.ID}}</p>
+          <p>作成時間: {{.CreatedAt}}</p>
+          <p>Aさんの素点: {{.SotenA}}</p>
+          <p>Bさんの素点: {{.SotenB}}</p>
+          <p>Cさんの素点: {{.SotenC}}</p>
+          <p>Dさんの素点: {{.SotenD}}</p>
+          <label><a href="/detail/{{.ID}}">編集</a></label>
+          <label><a href="/delete_check/{{.ID}}">削除</a></label>
+        </li>
+        {{end}}
+      </ul>
+    </div>
+  </div>
+</body>
+
+</html>

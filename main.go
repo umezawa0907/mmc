@@ -1,6 +1,7 @@
 package main
 
 import (
+	"mmc/gin/models"
 	"net/http"
 	"strconv"
 
@@ -12,20 +13,20 @@ func main() {
 	router := gin.Default()
 	router.LoadHTMLGlob("views/*.html")
 
-	dbInit()
+	models.DbInit()
 
 	//一覧
 	router.GET("/", func(c *gin.Context) {
-		pointList := dbGetAll()
+		pointList := models.DbGetAll()
 		c.HTML(200, "index.html", gin.H{"pointList": pointList})
 	})
 
 	//登録
 	router.POST("/new", func(c *gin.Context) {
-		var form Point
+		var form models.Point
 		// ここがバリデーション部分
 		if err := c.Bind(&form); err != nil {
-			pointList := dbGetAll()
+			pointList := models.DbGetAll()
 			c.HTML(http.StatusBadRequest, "index.html", gin.H{"pointList": pointList, "err": err})
 			c.Abort()
 		} else {
@@ -40,7 +41,7 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
-			dbInsert(sotenA, sotenB, sotenC, sotenD)
+			models.DbInsert(sotenA, sotenB, sotenC, sotenD)
 			c.Redirect(302, "/")
 		}
 	})
@@ -52,7 +53,7 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		point := dbGetOne(id)
+		point := models.DbGetOne(id)
 		c.HTML(200, "detail.html", gin.H{"point": point})
 	})
 
@@ -74,7 +75,7 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		dbUpdate(id, sotenA, sotenB, sotenC, sotenD)
+		models.DbUpdate(id, sotenA, sotenB, sotenC, sotenD)
 		c.Redirect(302, "/")
 	})
 
@@ -85,7 +86,7 @@ func main() {
 		if err != nil {
 			panic("ERROR")
 		}
-		point := dbGetOne(id)
+		point := models.DbGetOne(id)
 		c.HTML(200, "delete.html", gin.H{"point": point})
 	})
 
@@ -96,7 +97,7 @@ func main() {
 		if err != nil {
 			panic("ERROR")
 		}
-		dbDelete(id)
+		models.DbDelete(id)
 		c.Redirect(302, "/")
 
 	})

@@ -2,6 +2,7 @@ package models
 
 import "github.com/jinzhu/gorm"
 
+// Point は素点の型定義
 type Point struct {
 	gorm.Model
 	SotenA int
@@ -10,8 +11,8 @@ type Point struct {
 	SotenD int
 }
 
-// データインサート処理
-func dbInsert(sotenA int, sotenB int, sotenC int, sotenD int) {
+// DbInsert はデータインサート処理
+func DbInsert(sotenA int, sotenB int, sotenC int, sotenD int) {
 	db := gormConnect()
 
 	defer db.Close()
@@ -24,8 +25,8 @@ func dbInsert(sotenA int, sotenB int, sotenC int, sotenD int) {
 	})
 }
 
-//DB更新
-func dbUpdate(id int, sotenAValue int, sotenBValue int, sotenCValue int, sotenDValue int) {
+// DbUpdate はDB更新
+func DbUpdate(id int, sotenAValue int, sotenBValue int, sotenCValue int, sotenDValue int) {
 	db := gormConnect()
 	var point Point
 	db.First(&point, id)
@@ -37,8 +38,8 @@ func dbUpdate(id int, sotenAValue int, sotenBValue int, sotenCValue int, sotenDV
 	db.Close()
 }
 
-// 全件取得
-func dbGetAll() []Point {
+// DbGetAll は全件取得
+func DbGetAll() []Point {
 	db := gormConnect()
 
 	defer db.Close()
@@ -48,8 +49,8 @@ func dbGetAll() []Point {
 	return pointList
 }
 
-//DB一つ取得
-func dbGetOne(id int) Point {
+// DbGetOne はDB一つ取得
+func DbGetOne(id int) Point {
 	db := gormConnect()
 	var point Point
 	db.First(&point, id)
@@ -57,8 +58,8 @@ func dbGetOne(id int) Point {
 	return point
 }
 
-//DB削除
-func dbDelete(id int) {
+// DbDelete はDB削除
+func DbDelete(id int) {
 	db := gormConnect()
 	var point Point
 	db.First(&point, id)

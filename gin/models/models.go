@@ -16,8 +16,8 @@ func gormConnect() *gorm.DB {
 	return db
 }
 
-// DBの初期化
-func dbInit() {
+// DbInit はDBの初期化
+func DbInit() {
 	db := gormConnect()
 
 	// コネクション解放解放
